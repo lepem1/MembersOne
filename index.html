@@ -8,48 +8,57 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#7c3aed; --glass: rgba(255,255,255,0.03);
-      --glass-2: rgba(255,255,255,0.02);
+      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#7c3aed;
+      --glass: rgba(255,255,255,0.04); --glow:#9f7aea;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; background:linear-gradient(180deg,var(--bg),#061226); color:#e6eef8}
-    .container{max-width:1100px;margin:32px auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    *{box-sizing:border-box;scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background:linear-gradient(180deg,var(--bg),#061226);color:#e6eef8;line-height:1.5}
+    .container{max-width:1150px;margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:16px 0;position:sticky;top:0;background:rgba(15,23,36,0.8);backdrop-filter:blur(6px);z-index:100}
     .logo{display:flex;align-items:center;gap:12px}
-    .logo .mark{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#9f7aea,#5eead4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#061226}
-    nav a{color:var(--muted);text-decoration:none;margin-left:18px}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:36px}
-    .hero h1{font-size:32px;margin:0 0 10px}
-    .hero p{color:var(--muted);margin:0 0 18px}
-    .cta{display:flex;gap:12px}
-    .btn{background:var(--accent);border:none;padding:12px 16px;border-radius:10px;color:#041022;font-weight:600;cursor:pointer}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-    .card{background:linear-gradient(180deg,var(--card),#071126);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
-    .feature{background:var(--glass);padding:12px;border-radius:10px}
-    .price-grid{display:flex;gap:12px;margin-top:16px}
-    .price{flex:1;padding:14px;border-radius:10px;background:var(--glass-2)}
-    footer{margin-top:40px;color:var(--muted);font-size:13px;text-align:center}
-    code{background:rgba(255,255,255,0.03);padding:6px;border-radius:6px;color:#cfe9ff}
+    .mark{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#9f7aea,#5eead4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#061226}
+    nav a{color:var(--muted);text-decoration:none;margin-left:18px;transition:.2s}
+    nav a:hover{color:#fff}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;margin-top:48px}
+    .hero h1{font-size:38px;margin:0 0 12px;background:linear-gradient(90deg,#c084fc,#5eead4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{color:var(--muted);margin:0 0 20px}
+    .btn{padding:12px 20px;border-radius:12px;font-weight:600;cursor:pointer;border:none;transition:.25s}
+    .btn.primary{background:linear-gradient(135deg,#9f7aea,#5eead4);color:#041022}
+    .btn.primary:hover{transform:scale(1.05);box-shadow:0 0 18px var(--glow)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--muted)}
+    .btn.ghost:hover{color:#fff;border-color:var(--accent)}
+    .card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 6px 22px rgba(2,6,23,0.6);transition:.3s}
+    .card:hover{transform:translateY(-4px);box-shadow:0 10px 26px rgba(2,6,23,0.8)}
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:28px}
+    .feature{background:var(--glass);padding:14px;border-radius:12px}
+    .price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:18px}
+    .price{padding:16px;border-radius:12px;background:rgba(255,255,255,0.03);text-align:center}
+    footer{margin-top:60px;color:var(--muted);font-size:13px;text-align:center;padding:18px 0;border-top:1px solid rgba(255,255,255,0.05)}
+    code{background:rgba(255,255,255,0.05);padding:6px 8px;border-radius:6px;color:#cfe9ff}
     .invite-box{display:flex;flex-direction:column;gap:10px}
-    .small{font-size:13px;color:var(--muted)}
-    .faq{margin-top:18px}
-    .faq details{background:var(--glass);padding:12px;border-radius:10px;margin-bottom:8px}
-    .hero-right{display:flex;flex-direction:column;gap:12px}
-    input[type=text]{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
     .copy-row{display:flex;gap:8px}
-    @media(max-width:980px){.hero{grid-template-columns:1fr}.features{grid-template-columns:repeat(2,1fr)}.price-grid{flex-direction:column}}
-    @media(max-width:560px){.features{grid-template-columns:1fr}}
+    input[type=text]{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:inherit}
+    .faq details{background:var(--glass);padding:14px;border-radius:12px;margin-bottom:10px;transition:.3s}
+    .faq summary{cursor:pointer}
+    .faq details[open]{background:rgba(124,58,237,0.1)}
+    .cta-banner{margin:60px 0;padding:30px;text-align:center;background:linear-gradient(90deg,#7c3aed22,#5eead422);border-radius:16px}
+    .cta-banner h2{margin:0 0 10px}
+    .socials{margin-top:16px;display:flex;justify-content:center;gap:14px}
+    .socials a{color:var(--muted);transition:.2s}
+    .socials a:hover{color:#fff}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- HEADER -->
     <header>
       <div class="logo">
         <div class="mark">MB</div>
         <div>
           <div style="font-weight:700">MemberBot</div>
-          <div class="small">Growth tools for Discord communities</div>
+          <div style="font-size:13px;color:var(--muted)">Growth tools for Discord</div>
         </div>
       </div>
       <nav>
@@ -57,110 +66,91 @@
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
-        <a href="privacy.html" target="_blank">Privacy Policy</a>
-        <a href="terms.html" target="_blank">Terms of Service</a>
       </nav>
     </header>
 
-    <main class="hero">
-      <section>
-        <h1>Add real members to your Discord — fast & safe</h1>
-        <p>MemberBot automates giveaways, member delivery with coin packs, onboarding, verification and basic analytics so your server grows reliably without manual work.</p>
-        <div class="cta">
-          <button class="btn" id="inviteBtn">Invite bot</button>
-          <button class="btn ghost" id="docsBtn">Docs</button>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <h1>Grow your Discord — fast & safe</h1>
+        <p>MemberBot automates giveaways, coin packs, onboarding, verification and analytics. Focus on your community, let us handle growth.</p>
+        <div style="display:flex;gap:14px">
+          <button class="btn primary" id="inviteBtn">🚀 Invite bot</button>
+          <button class="btn ghost" id="docsBtn">📖 Docs</button>
         </div>
-
-        <div class="card features" id="features">
-          <div class="feature"><strong>Automated member delivery</strong><div class="small">Spend coins to receive members. Flexible packs and cooldowns.</div></div>
-          <div class="feature"><strong>Giveaways & campaigns</strong><div class="small">Built-in giveaway manager that rewards entrants with members or coins.</div></div>
-          <div class="feature"><strong>Onboarding & verification</strong><div class="small">Auto-roles, welcome messages, and optional verification to keep your server safe.</div></div>
-          <div class="feature"><strong>Proofs & logs</strong><div class="small">Channels to show delivered members and transaction history for transparency.</div></div>
-          <div class="feature"><strong>Pricing control</strong><div class="small">Set coins = members, change pack sizes, create promotions.</div></div>
-          <div class="feature"><strong>Owner dashboard</strong><div class="small">Simple dashboard to manage packs, view analytics and refund if needed.</div></div>
-        </div>
-
-        <section id="pricing" class="card" style="margin-top:18px">
-          <h3 style="margin:0 0 10px">Pricing</h3>
-          <div class="price-grid">
-            <div class="price"><strong>Starter</strong><div class="small">1 coin = 1 member<br>Best for small servers</div><div style="margin-top:10px"><strong>₹49 / pack</strong></div></div>
-            <div class="price"><strong>Pro</strong><div class="small">Bulk packs, higher priority delivery</div><div style="margin-top:10px"><strong>₹199 / pack</strong></div></div>
-            <div class="price"><strong>Custom</strong><div class="small">Enterprise & recurring subscriptions</div><div style="margin-top:10px"><strong>Contact us</strong></div></div>
-          </div>
-        </section>
-      </section>
-
-      <aside class="hero-right">
-        <div class="card invite-box">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div style="font-weight:700">Invite MemberBot</div>
-              <div class="small">Add the bot to your server and get started in minutes.</div>
-            </div>
-          </div>
-          <div class="copy-row">
-            <input id="inviteLink" type="text" readonly value="https://discord.com/oauth2/authorize?client_id=1418559525442682885&scope=bot%20applications.commands&permissions=8" />
-            <button class="btn" id="copyBtn">Copy</button>
-          </div>
-          <div class="small">Quick steps:</div>
-          <ol class="small">
-            <li>Click <em>Copy</em> and open the invite URL to add the bot.</li>
-            <li>Use <code>/setup</code> in your server to configure packs and channels.</li>
-          </ol>
-        </div>
-
-        <div class="card" style="text-align:left">
-          <h4 style="margin:0 0 8px">Setup preview</h4>
-          <div class="small">Recommended channel layout</div>
-          <ul class="small">
-            <li>📜｜pricing</li>
-            <li>🎁｜giveaways</li>
-            <li>✅｜proofs</li>
-            <li>👋｜welcome</li>
-            <li>📬｜support</li>
-          </ul>
-        </div>
-
-        <div class="card small" id="contact">
-          <strong>Contact</strong>
-          <div class="small">Support server: <a href="https://discord.gg/9CsJUtqWQg" style="color:var(--accent)" target="_blank">Join support</a></div>
+      </div>
+      <aside class="card invite-box">
+        <div><strong>Invite MemberBot</strong><div style="font-size:13px;color:var(--muted)">Add in 2 clicks</div></div>
+        <div class="copy-row">
+          <input id="inviteLink" type="text" readonly value="https://discord.com/oauth2/authorize?client_id=1418559525442682885&scope=bot%20applications.commands&permissions=8" />
+          <button class="btn primary" id="copyBtn">Copy</button>
         </div>
       </aside>
-    </main>
-
-    <section class="faq" id="faq">
-      <h3>FAQ</h3>
-      <details><summary>Is using MemberBot safe?</summary><div class="small">We recommend using verified payment & moderation policies. MemberBot follows Discord TOS — however you should review Discord's rules for third-party member services to remain compliant.</div></details>
-      <details><summary>How long until members arrive?</summary><div class="small">Delivery time depends on pack size and queue. Typical small packs arrive within minutes to an hour.</div></details>
-      <details><summary>How do refunds work?</summary><div class="small">Admins can request refunds via <code>/refund &lt;tx-id&gt;</code>. Refunds require verification.</div></details>
     </section>
 
+    <!-- FEATURES -->
+    <div id="features" class="features">
+      <div class="feature"><strong>🎯 Auto delivery</strong><div style="font-size:13px;color:var(--muted)">Spend coins to receive members instantly.</div></div>
+      <div class="feature"><strong>🎁 Campaigns</strong><div style="font-size:13px;color:var(--muted)">Giveaways that reward entrants with members/coins.</div></div>
+      <div class="feature"><strong>✅ Verification</strong><div style="font-size:13px;color:var(--muted)">Keep your server safe with verification & auto-roles.</div></div>
+      <div class="feature"><strong>📜 Proof logs</strong><div style="font-size:13px;color:var(--muted)">Track delivery history for transparency.</div></div>
+      <div class="feature"><strong>⚙️ Pricing control</strong><div style="font-size:13px;color:var(--muted)">Define packs, promos and coin ratios.</div></div>
+      <div class="feature"><strong>📊 Dashboard</strong><div style="font-size:13px;color:var(--muted)">Manage packs, analytics, and refunds.</div></div>
+    </div>
+
+    <!-- PRICING -->
+    <section id="pricing" class="card" style="margin-top:32px">
+      <h2>Pricing</h2>
+      <div class="price-grid">
+        <div class="price"><strong>Starter</strong><div>1 coin = 1 member</div><div style="margin-top:8px"><strong>₹49 / pack</strong></div></div>
+        <div class="price"><strong>Pro</strong><div>Bulk packs, priority delivery</div><div style="margin-top:8px"><strong>₹199 / pack</strong></div></div>
+        <div class="price"><strong>Custom</strong><div>Enterprise or recurring</div><div style="margin-top:8px"><strong>Contact us</strong></div></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq" style="margin-top:32px">
+      <h2>FAQ</h2>
+      <details><summary>Is MemberBot safe?</summary><p>Yes, but always review Discord's ToS before using third-party bots.</p></details>
+      <details><summary>How fast are members delivered?</summary><p>Small packs: usually minutes to an hour. Larger packs may queue.</p></details>
+      <details><summary>Can I get a refund?</summary><p>Admins can use <code>/refund &lt;tx-id&gt;</code> for verified refunds.</p></details>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <div class="cta-banner">
+      <h2>Ready to boost your server?</h2>
+      <p>Invite MemberBot now and start growing in minutes.</p>
+      <button class="btn primary" onclick="window.open(document.getElementById('inviteLink').value,'_blank')">🚀 Add to Discord</button>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" style="text-align:center;margin-top:40px">
+      <strong>Need help?</strong><br/>
+      <a href="https://discord.gg/9CsJUtqWQg" style="color:var(--accent)" target="_blank">Join support server</a>
+      <div class="socials">
+        <a href="#">🐦</a><a href="#">💻</a><a href="#">📺</a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
     <footer>
-      © <span id="year"></span> MemberBot — Made with ♥ for Discord communities | 
-      <a href="privacy.html" target="_blank" style="color:var(--accent)">Privacy Policy</a> | 
-      <a href="terms.html" target="_blank" style="color:var(--accent)">Terms of Service</a>
+      © <span id="year"></span> MemberBot — Made with ♥ for Discord communities
     </footer>
   </div>
 
   <script>
-    const inviteInput = document.getElementById('inviteLink');
-    const copyBtn = document.getElementById('copyBtn');
-    const inviteBtn = document.getElementById('inviteBtn');
-    const docsBtn = document.getElementById('docsBtn');
-
-    copyBtn.addEventListener('click', ()=>{
-      inviteInput.select();
-      document.execCommand('copy');
-      copyBtn.textContent = 'Copied!';
+    const inviteInput=document.getElementById('inviteLink');
+    const copyBtn=document.getElementById('copyBtn');
+    const inviteBtn=document.getElementById('inviteBtn');
+    const docsBtn=document.getElementById('docsBtn');
+    copyBtn.addEventListener('click',()=>{
+      inviteInput.select();document.execCommand('copy');
+      copyBtn.textContent='Copied!';
       setTimeout(()=>copyBtn.textContent='Copy',1200);
     });
-    inviteBtn.addEventListener('click', ()=>{
-      window.open(inviteInput.value,'_blank');
-    });
-    docsBtn.addEventListener('click', ()=>{
-      window.open('#','_blank');
-    });
-    document.getElementById('year').textContent = new Date().getFullYear();
+    inviteBtn.addEventListener('click',()=>{window.open(inviteInput.value,'_blank')});
+    docsBtn.addEventListener('click',()=>{window.open('#','_blank')});
+    document.getElementById('year').textContent=new Date().getFullYear();
   </script>
 </body>
 </html>
